@@ -6,8 +6,7 @@ let cyclingCircles = [];
 function preload() {
   img = loadImage('media/bg.jpg');
   song = loadSound('media/lakchatri.mp3');
-  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  unlockAudioContext(audioCtx);
+  unlockAudioContext(getAudioContext());
   fft = new p5.FFT();
 }
 
