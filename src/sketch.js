@@ -1,12 +1,13 @@
 let img;
-let song, analyzer, fft;
+let audioCtx, song, analyzer, fft;
 let globalArc = 0;
 let cyclingCircles = [];
 
 function preload() {
   img = loadImage('media/bg.jpg');
   song = loadSound('media/lakchatri.mp3');
-  unlockAudioContext(song)
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  unlockAudioContext(audioCtx);
   fft = new p5.FFT();
 }
 
