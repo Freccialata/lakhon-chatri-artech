@@ -6,6 +6,7 @@ let cyclingCircles = [];
 function preload() {
   img = loadImage('media/bg.jpg');
   song = loadSound('media/lakchatri.mp3');
+  unlockAudioContext(song)
   fft = new p5.FFT();
 }
 
@@ -91,44 +92,14 @@ const rmsCircles = (rms) => {
   ellipse(width, height, 10 + rms * multipl, 10 + rms * multipl);
 }
 
-class Particle {
 
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-    this.history = [];
-  }
-
-  update() {
-    this.x = this.x + random(-5, 5);
-    this.y = this.y + random(-5, 5);
-
-    let v = createVector(this.x, this.y);
-
-    this.history.push(v);
-    //console.log(this.history.length);
-
-    if (this.history.length > 100) {
-      this.history.splice(0, 1);
-    }
-  }
-
-  show() {
-    stroke(255);
-    beginShape();
-    for (let i = 0; i < this.history.length; i++) {
-      let pos = this.history[i];
-      noFill();
-      vertex(pos.x, pos.y);
-      endShape();
-    }
-
-    noStroke();
-    fill(200);
-    ellipse(this.x, this.y, 24, 24);
-  }
-}
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+function unlockAudioContext(audioCtx) {
+  // credit: Matt Montag
+  // src: https://www.mattmontag.com/web/unlock-web-audio-in-safari-for-ios-and-macos
+  if (audioCtx.state !== 'suspended') return;
+  const b = document.body;
+  const events = ['touchstart','touchend', 'mousedown','keydown'];
+  events.forEach(e => b.addEventListener(e, unlock, false));
+  function unlock() { audioCtx.resume().then(clean); }
+  function clean() { events.forEach(e => b.removeEventListener(e, unlock)); }
 }
