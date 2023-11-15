@@ -4,15 +4,15 @@ let globalArc = 0;
 let cyclingCircles = [];
 
 function preload() {
-  img = loadImage('../media/bg.jpg');
-  song = loadSound('../media/lakchatri.mp3');
+  img = loadImage('media/bg.jpg');
+  song = loadSound('media/lakchatri.mp3');
   fft = new p5.FFT();
 }
 
 function setup() {
   const avoid_overflowing = 4;
-  // createCanvas(2560 - avoid_overflowing, 1600 - avoid_overflowing);
-  createCanvas(1920 - avoid_overflowing, 1080 - avoid_overflowing);
+  createCanvas(2560 - avoid_overflowing, 1600 - avoid_overflowing); // MAIN installation sreen
+  // createCanvas(1080, 720); // test screen
   song.loop();
   analyzer = new p5.Amplitude();
   analyzer.setInput(song);
