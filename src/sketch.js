@@ -11,9 +11,10 @@ function preload() {
 }
 
 function setup() {
-  const avoid_overflowing = 4;
-  createCanvas(2560 - avoid_overflowing, 1600 - avoid_overflowing); // MAIN installation sreen
+  // const avoid_overflowing = 400;
+  // createCanvas(2560 - avoid_overflowing, 1600 - avoid_overflowing); // MAIN installation sreen
   // createCanvas(1080, 720); // test screen
+  // createCanvas(1536, 860); // video record fullhd laptop
   song.loop();
   analyzer = new p5.Amplitude();
   analyzer.setInput(song);
